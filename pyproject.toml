@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "moneydrop_telebot"
+version = "0.1.0"
+description = ""
+authors = ["Win Htet Aung <whaung1998@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.111.0"}
+python-telegram-bot = {extras = ["webhooks"], version = "^21.3"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
