@@ -22,7 +22,7 @@ class Question(QuestionBase):
     category_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class CategoryCreate(CategoryBase):
@@ -34,4 +34,4 @@ class Category(CategoryBase):
     questions: list[Question] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -5,13 +5,14 @@ from telegram.ext import (
     Application,
     CommandHandler,
     MessageHandler,
+    ConversationHandler,
     CallbackQueryHandler,
     filters,
 )
 from fastapi import FastAPI, Request, Response
 from config import settings
 
-import handlers
+import handlers, constants
 
 
 ptb = (
@@ -45,5 +46,16 @@ async def process_update(request: Request):
 
 
 ptb.add_handler(CommandHandler("start", handlers.start))
+ptb.add_handler(
+    ConversationHandler(
+        entry_points=[CommandHandler("create_category", handlers.create_category)],
+        states={
+            constants.INPUT: [
+                MessageHandler(filters.TEXT & ~(filters.COMMAND), handlers.input_state)
+            ]
+        },
+        fallbacks=[MessageHandler(filters.Regex("^cancel$"), handlers.cancel)],
+    )
+)
 ptb.add_handler(MessageHandler(filters.ALL, handlers.echo))
 ptb.add_handler(CallbackQueryHandler(handlers.choice))

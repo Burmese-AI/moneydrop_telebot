@@ -1,0 +1,2 @@
+INPUT = 1
+DONE = 2
